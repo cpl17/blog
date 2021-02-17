@@ -14,6 +14,8 @@ class User(UserBase):
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), unique=False, nullable=False)
 
+    baseuser_id = db.Column(db.Integer, db.ForeignKey('user_base.id'))
+
     posts = relationship("BlogPost", back_populates = "author")
     comments = relationship("Comment", back_populates = "comment_author")
 
