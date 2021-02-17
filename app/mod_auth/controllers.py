@@ -2,7 +2,8 @@ from flask import Flask, Blueprint, render_template, redirect, url_for,flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user,current_user 
 
-from app import db, login_manager, User
+from app import db, login_manager
+from app.mod_auth.models import User
 from app.mod_auth.forms import RegisterForm, LoginForm
 
 

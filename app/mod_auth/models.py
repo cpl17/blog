@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
 
-class Users(UserBase):
+class User(UserBase):
 
     __tablename__ = "users"
 
