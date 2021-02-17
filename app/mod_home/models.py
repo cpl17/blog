@@ -1,11 +1,7 @@
 from app import db,login_manager
 
 from sqlalchemy.orm import relationship
-from app.mod_auth.models import User
 
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(id)
 
 
 
