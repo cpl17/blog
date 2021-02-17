@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from flask_gravatar import Gravatar
 
-from flask_sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 
 
 app = Flask(__name__)
