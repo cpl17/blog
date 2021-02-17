@@ -13,7 +13,6 @@ mod_home = Blueprint('home', __name__)
 @mod_home.route('/')
 def get_all_posts():
     posts = BlogPost.query.all()
-    print(current_user.is_authenticated)
     return render_template("home/index.html", all_posts=posts)
 
 @mod_home.route("/post/<int:post_id>", methods=["GET","POST"])
