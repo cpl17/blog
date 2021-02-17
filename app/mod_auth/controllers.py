@@ -9,12 +9,6 @@ from app.mod_auth.models import User
 
 mod_auth = Blueprint('auth', __name__)
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
 
 @mod_auth.route('/register', methods=["POST","GET"])
 def register():
