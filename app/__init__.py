@@ -12,7 +12,6 @@ app = Flask(__name__)
 
 app.config.from_object('config.settings')
 
-
 Bootstrap(app)
 db = SQLAlchemy(app)
 ckeditor = CKEditor(app)
