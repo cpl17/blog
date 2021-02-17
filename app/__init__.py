@@ -5,6 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_gravatar import Gravatar
 
+from sqlalchemy.orm import relationship
+from flask_login import UserMixin
+
+
 
 
 
@@ -24,6 +28,22 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+class User(UserMixin,db.Model):
+   
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), nullable=False)
+    email = db.Column(db.String(250), unique=True, nullable=False)
+    password = db.Column(db.String(250), unique=False, nullable=False)
+
+    posts = relationship("BlogPost", back_populates = "author")
+    comments = relationship("Comment", back_populates = "comment_author")
+        
+
+    def __repr__(self):
+        return '<User %r>' % (self.name)
 
 @login_manager.user_loader
 def load_user(id):
