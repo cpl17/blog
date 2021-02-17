@@ -4,8 +4,7 @@ from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from flask_gravatar import Gravatar
-
-from sqlalchemy.orm import relationship
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -25,26 +24,16 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-class User(UserMixin,db.Model):
-   
-    __tablename__ = "users"
+class UserBase(UserMixin,db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250), nullable=False)
-    email = db.Column(db.String(250), unique=True, nullable=False)
-    password = db.Column(db.String(250), unique=False, nullable=False)
-
-    posts = relationship("BlogPost", back_populates = "author")
-    comments = relationship("Comment", back_populates = "comment_author")
-        
-
-    def __repr__(self):
-        return '<User %r>' % (self.name)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
 
 @login_manager.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return UserBase.query.get(int(id))
 
 @app.errorhandler(404)
 def not_found(error):
