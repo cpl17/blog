@@ -38,7 +38,7 @@ def add_new_post():
     return render_template("admin/make-post.html", form=form)
 
 
-@mod_admin.route("/edit-post/<int:post_id>")
+@mod_admin.route("/edit-post/<int:post_id>", methods = ["POST","GET"])
 @admin_only
 def edit_post(post_id):
     post = BlogPost.query.get(post_id)
