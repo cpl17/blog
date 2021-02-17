@@ -1,8 +1,14 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 # Statement for enabling the development environment
 DEBUG = True
 
 # Define the application directory
-import os
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
 
 # Define the database - we are working with
@@ -18,10 +24,10 @@ CSRF_ENABLED = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data. 
-CSRF_SESSION_KEY = "secret"
+CSRF_SESSION_KEY = os.getenv("CSRF_SESSION_KEY")
 
 # Secret key for signing cookies
-SECRET_KEY = "secret"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
