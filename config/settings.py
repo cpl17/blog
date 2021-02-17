@@ -1,7 +1,7 @@
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 
 # Statement for enabling the development environment
@@ -11,7 +11,6 @@ DEBUG = True
 
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))  
 
-print(BASE_DIR)
 
 # Define the database - we are working with
 # SQLite for this example
@@ -27,11 +26,11 @@ CSRF_ENABLED = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data. 
-CSRF_SESSION_KEY = os.getenv("CSRF_SESSION_KEY")
+CSRF_SESSION_KEY = "secret"
 
 
 # Secret key for signing cookies
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = "secret"
 
 
 
