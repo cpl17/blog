@@ -24,6 +24,9 @@ THREADS_PER_PAGE = 2
 CSRF_ENABLED = True
 
 
+
+#TODO: Figure out how to secure these 
+
 # Use a secure, unique and absolutely secret key for
 # signing the data. 
 CSRF_SESSION_KEY = "secret"
