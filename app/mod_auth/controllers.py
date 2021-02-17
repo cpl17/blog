@@ -43,11 +43,7 @@ def register():
 
         login_user(new_user)
 
-        
-        print(current_user.is_authenticated)
-
-
-
+    
         return redirect(url_for('home.get_all_posts'))
 
 
