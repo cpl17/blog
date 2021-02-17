@@ -12,7 +12,7 @@ app.config.from_object('config.settings')
 
 Bootstrap(app)
 db = SQLAlchemy(app)
-db.create_all()
+
 
 ckeditor = CKEditor(app)
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
@@ -23,6 +23,9 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 @app.errorhandler(404)
 def not_found(error):
@@ -36,4 +39,6 @@ from app.mod_admin.controllers import mod_admin as admin_module
 app.register_blueprint(auth_module)
 app.register_blueprint(home_module)
 app.register_blueprint(admin_module)
+
+db.create_all()
 
