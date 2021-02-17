@@ -4,7 +4,7 @@ from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from flask_gravatar import Gravatar
-from datetime import datetime
+
 
 
 app = Flask(__name__)
@@ -24,16 +24,7 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-class UserBase(UserMixin,db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
-
-
-@login_manager.user_loader
-def load_user(id):
-    return UserBase.query.get(int(id))
 
 @app.errorhandler(404)
 def not_found(error):
@@ -49,4 +40,6 @@ app.register_blueprint(home_module)
 app.register_blueprint(admin_module)
 
 db.create_all()
+
+
 

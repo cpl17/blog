@@ -1,12 +1,14 @@
-from app import db, login_manager, UserBase
+from app import db, login_manager
 
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
 
-class User(UserBase):
+class User(UserMixin,db.Model):
 
     __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
 
 
     name = db.Column(db.String(250), nullable=False)
@@ -16,6 +18,11 @@ class User(UserBase):
 
     posts = relationship("BlogPost", back_populates = "author")
     comments = relationship("Comment", back_populates = "comment_author")
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 
