@@ -20,9 +20,6 @@ class User(UserMixin,db.Model):
     comments = relationship("Comment", back_populates = "comment_author")
 
 
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
 
    
 
