@@ -24,9 +24,18 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-@login_manager.user_loader
-def load_user(id):
-    return None
+from app.mod_auth.controllers import mod_auth as auth_module
+from app.mod_auth.models import User 
+
+from app.mod_home.controllers import mod_home as home_module
+from app.mod_admin.controllers import mod_admin as admin_module
+
+
+app.register_blueprint(auth_module)
+app.register_blueprint(home_module)
+app.register_blueprint(admin_module)
+
+db.create_all()
 
 
 
@@ -35,15 +44,10 @@ def not_found(error):
     return render_template('404.html'), 404
 
 
-from app.mod_auth.controllers import mod_auth as auth_module
-from app.mod_home.controllers import mod_home as home_module
-from app.mod_admin.controllers import mod_admin as admin_module
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
-app.register_blueprint(auth_module)
-app.register_blueprint(home_module)
-app.register_blueprint(admin_module)
-
-db.create_all()
 
 
 

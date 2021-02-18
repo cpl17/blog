@@ -22,11 +22,9 @@ class User(UserMixin,db.Model):
 
 @login_manager.user_loader
 def load_user(id):
-    try:
-        return User.query.get(int(id))
+    return User.query.get(int(id))
 
-    except:
-        return None
+   
 
 
 
